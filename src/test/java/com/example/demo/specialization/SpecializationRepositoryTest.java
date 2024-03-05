@@ -19,10 +19,10 @@ import org.springframework.test.annotation.Rollback;
 import com.example.demo.entity.Specialization;
 import com.example.demo.repo.SpecializationRepository;
 
-@DataJpaTest(showSql = true)
-@AutoConfigureTestDatabase(replace = Replace.NONE)
-@Rollback(false)
-@TestMethodOrder(OrderAnnotation.class)
+@DataJpaTest(showSql = true) //activate data JPA
+@AutoConfigureTestDatabase(replace = Replace.NONE) //user our own properties file as input to create datasource
+@Rollback(false) //after unit testing data will be deleted rollback=true
+@TestMethodOrder(OrderAnnotation.class) //execute test  cases in order
 
 public class SpecializationRepositoryTest {
 	@Autowired
