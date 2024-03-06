@@ -16,6 +16,12 @@ import com.example.demo.service.ISpecializationService;
 public class SpecializationController {
 	@Autowired
 	private ISpecializationService service;
+	
+	@GetMapping("/register")
+	public String displayRegister() {
+		return "SpecializationRegister";
+	}
+	
 	@GetMapping("/all")
 	public String viewAll(Model model) {
 		List<Specialization> list= service.getAllSpecializatiion();
