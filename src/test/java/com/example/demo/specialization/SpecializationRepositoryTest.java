@@ -32,7 +32,7 @@ public class SpecializationRepositoryTest {
 	/**
 	 * Test save operation
 	 **/
-	@Disabled
+//	@Disabled
 	@Test
 	@Order(1)
 	public void testSpecCreate() {

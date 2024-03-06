@@ -19,7 +19,7 @@ public class SpecializationController {
 	@GetMapping("/all")
 	public String viewAll(Model model) {
 		List<Specialization> list= service.getAllSpecializatiion();
-		model.addAttribute(list);
+		model.addAttribute("list",list);
 		
 		return "SpecializationData";
 		
