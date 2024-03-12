@@ -25,6 +25,7 @@ $(document).ready(function () {
 					$("#specNoteError").css('color', 'red');
 				}
 				else {
+					
 					$("#specNoteError").hide();
 					specNoteError = true;
 
@@ -48,8 +49,23 @@ $(document).ready(function () {
 					$("#specNameError").css('color', 'red');
 				}
 				else {
-					$("#specNameError").hide();
-					specNameError = true;
+					$.ajax({
+						url:'checkName',
+						data:{"name":val},
+						success:function(respText){
+							if (respText != '') {
+								$("#specNameError").show();
+								specNameError = false;
+								$("#specNameError").html(respText);
+								$("#specNameError").css('color', 'red');
+							}
+							else {
+								$("#specNameError").hide();
+								specNameError = true;
+							}
+							
+						}
+					})
 
 
 				}
@@ -72,8 +88,23 @@ $(document).ready(function () {
 					$("#specCodeError").css('color', 'red');
 				}
 				else {
-					$("#specCodeError").hide();
-					specCodeError = true;
+					$.ajax({
+						url:'checkCode',
+						data:{"code":val},
+						success:function(respText){
+							if (respText != '') {
+								$("#specCodeError").show();
+								specCodeError = false;
+								$("#specCodeError").html(respText);
+								$("#specCodeError").css('color', 'red');
+							}
+							else {
+								$("#specCodeError").hide();
+								specCodeError = true;
+							}
+							
+						}
+					})
 
 
 				}

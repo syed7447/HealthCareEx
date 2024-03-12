@@ -29,5 +29,4 @@ public class Specialization {
 
 	@Column(name = "spec_note_col", length = 10, nullable = false)
 	private String specNote;
-
 }
