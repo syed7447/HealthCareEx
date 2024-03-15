@@ -21,8 +21,9 @@ public class SpecializationExcelView extends AbstractXlsView {
 			HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
 		//define your own excel file name
-		
+		response.addHeader("content-Disposition", "attachment;specialization=SPec.xlsx");
 		//read data given by controller
+		@SuppressWarnings("unchecked")
 		List<Specialization> list= (List<Specialization>) model.get("list");
 		
 		//create one sheet
@@ -30,8 +31,23 @@ public class SpecializationExcelView extends AbstractXlsView {
 		
 		//create row#0 as header
 		setHead(sheet);
+		
 		//create row#1 onwards list data
+		setBody(sheet,list);
 
+	}
+
+	private void setBody(Sheet sheet, List<Specialization> list) {
+		// TODO Auto-generated method stub
+		int rowNum=1;
+		for(Specialization spec:list) {
+			Row row= sheet.createRow(rowNum++);
+			row.createCell(0).setCellValue(spec.getId());
+			row.createCell(1).setCellValue(spec.getSpecCode());
+			row.createCell(2).setCellValue(spec.getSpecName());
+			row.createCell(3).setCellValue(spec.getSpecNote());
+		}
+		
 	}
 
 	private void setHead(Sheet sheet) {

@@ -49,9 +49,14 @@ $(document).ready(function () {
 					$("#specNameError").css('color', 'red');
 				}
 				else {
+						var id=0; //for register
+					if($("#id").val()!=undefined){//edit page
+					specNameError=true;
+					id=$("#id").val();
+					}
 					$.ajax({
 						url:'checkName',
-						data:{"name":val},
+						data:{"name":val,"id":id},
 						success:function(respText){
 							if (respText != '') {
 								$("#specNameError").show();
@@ -88,9 +93,15 @@ $(document).ready(function () {
 					$("#specCodeError").css('color', 'red');
 				}
 				else {
+					var id=0; //for register
+					if($("#id").val()!=undefined){//edit page
+					specCodeError=true;
+					id=$("#id").val();
+						
+					}
 					$.ajax({
 						url:'checkCode',
-						data:{"code":val},
+						data:{"code":val,"id":id},
 						success:function(respText){
 							if (respText != '') {
 								$("#specCodeError").show();

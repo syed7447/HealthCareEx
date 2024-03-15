@@ -93,18 +93,24 @@ public class SpecializationController {
 	}
 
 	@GetMapping("/checkCode")
-	public @ResponseBody String validateSpecCode(@RequestParam String code) {
+	public @ResponseBody String validateSpecCode(@RequestParam String code,@RequestParam Long id) {
 		String message = "";
-		if (service.isSpecCodeExist(code)) {
+		if (id==0 && service.isSpecCodeExist(code)) { //register check
+			message = code + ", already exist";
+		}
+		else if (id!=0 && service.isSpecCodeExistForEdit(code,id)) { //register check
 			message = code + ", already exist";
 		}
 		return message; // this is not viewName this is a message
 	}
 
 	@GetMapping("/checkName")
-	public @ResponseBody String validateSpecName(@RequestParam String name) {
+	public @ResponseBody String validateSpecName(@RequestParam String name,@RequestParam long id) {
 		String message = "";
-		if (service.isSpecNameExist(name)) {
+		if (id==0 && service.isSpecNameExist(name)) {
+			message = name + ", already exist";
+		}
+		else if (id!=0 && service.isSpecNameExistForEdit(name,id)) {
 			message = name + ", already exist";
 		}
 		return message; // this is not viewName this is a message
@@ -114,6 +120,10 @@ public class SpecializationController {
 	public ModelAndView exportToExcel() {
 		ModelAndView m= new ModelAndView();
 		m.setView(new SpecializationExcelView());
+		//read data from db
+		List<Specialization> list= service.getAllSpecializatiion();
+		//send to excelimpl class
+		m.addObject("list",list);
 		return m;
 		
 	}
