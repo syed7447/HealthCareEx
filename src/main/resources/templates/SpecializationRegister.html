@@ -53,8 +53,12 @@
 							<span id="specNoteError"></span>
 						</div>
 					</div>
+
 					<button type="submit" class="btn btn-success">Create <i class="fa fa-plus-circle"
 							aria-hidden="true"></i></button>
+
+
+				</form>
 			</div>
 			<div th:if="${message != null}" class="card-footer bg-white text-info">
 				<span th:text="${message}"></span>
@@ -62,7 +66,7 @@
 		</div>
 	</div>
 	<script th:src="@{/myjs/spec_validate.js}">
-		
+
 	</script>
 </body>
 
