@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.example.demo.entity.Specialization;
 
@@ -14,5 +15,6 @@ public interface ISpecializationService {
 	public boolean isSpecCodeExistForEdit(String specCode,long id);
 	public boolean isSpecNameExist(String specName);
 	public boolean isSpecNameExistForEdit(String specName,long id);
+	Map<Long,String> getSpecIdNandName();
 
 }

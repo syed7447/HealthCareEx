@@ -1,5 +1,7 @@
 package com.example.demo.repo;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -14,6 +16,8 @@ public interface SpecializationRepository extends JpaRepository<Specialization, 
 	Integer getSpecializationSpecNameCount(String specName);
 	@Query("SELECT COUNT(specName) from Specialization where specName=:specName AND id!=:id")
 	Integer getSpecializationSpecNameCountForEdit(String specName,long id);
+	@Query("SELECT id,specCode from Specialization")
+	List<Object[]> getSpecIdNandName();
 		
 	
 

@@ -5,7 +5,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -41,5 +44,22 @@ public class Doctor {
 	@Column(name="doc_note_col")
 	private String note;
 	
+	/*
+	 * @Column(name ="image") private String photos;
+	 */
+	
+	@Column(name ="img")
+	private String imgLoc;
+	
+	/*
+	 * @Transient private String photosImagePath; public String getPhotoImagePath()
+	 * { if(photos == null || id==null) return null; else return "/user-photos/"+ id
+	 * +"/" + photos; }
+	 */
+	
+//	has-A relation
+	@ManyToOne
+	@JoinColumn(name="spec_id_fk_col")
+	private Specialization specialization;
 
 }

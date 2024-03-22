@@ -15,16 +15,25 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.example.demo.entity.Doctor;
 import com.example.demo.exception.DoctorNotFoundException;
 import com.example.demo.service.IDoctorService;
+import com.example.demo.service.ISpecializationService;
 
 @Controller
 @RequestMapping("/doctor")
 public class DoctorController {
 	@Autowired
 	private IDoctorService service;
+	@Autowired
+	private ISpecializationService specService;
+	
+	private void createDynamicUi(Model model) {
+		model.addAttribute("specializations", specService.getSpecIdNandName());
+		
+	}
 	// 1. show register page
 	@GetMapping("/register")
 	public String showRegister(@RequestParam(value = "message",required = false)String message,Model model) {
 		model.addAttribute("message", message);
+		createDynamicUi(model);
 		return "DoctorRegister";
 		
 	}
@@ -34,6 +43,7 @@ public class DoctorController {
 	public String save(@ModelAttribute Doctor doc,RedirectAttributes attributes) {
 		Long id = service.saveDoctor(doc);
 		attributes.addAttribute("message", "Doctor ("+id+") is created");
+		
 		return "redirect:register";
 		
 	}
@@ -45,7 +55,6 @@ public class DoctorController {
 		model.addAttribute("list", list);
 		model.addAttribute("message", message);
 		return "DoctorData";
-		
 	}
 	
 	//4.delete by id
@@ -63,7 +72,6 @@ public class DoctorController {
 		}
 		attributes.addAttribute("message", message);
 		return "redirect:all";
-		
 	}
 	
 	 //5. show edit
@@ -76,6 +84,8 @@ public class DoctorController {
 		try {
 			Doctor doc= service.getOneDoctor(id);
 			model.addAttribute("doctor", doc);
+			createDynamicUi(model);
+
 			page = "DoctorEdit";
 
 		} catch (DoctorNotFoundException e) {

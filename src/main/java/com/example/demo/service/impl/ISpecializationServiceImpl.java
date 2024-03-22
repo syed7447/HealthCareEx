@@ -1,6 +1,7 @@
 package com.example.demo.service.impl;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import com.example.demo.entity.Specialization;
 import com.example.demo.exception.SpecializationNotFoundException;
 import com.example.demo.repo.SpecializationRepository;
 import com.example.demo.service.ISpecializationService;
+import com.example.demo.util.MyCollectionsUtil;
 @Service
 public class ISpecializationServiceImpl implements ISpecializationService {
 	@Autowired
@@ -77,6 +79,14 @@ public class ISpecializationServiceImpl implements ISpecializationService {
 	public boolean isSpecNameExistForEdit(String specName, long id) {
 		// TODO Auto-generated method stub
 		return repo.getSpecializationSpecNameCountForEdit(specName,id)>0;
+	}
+
+	@Override
+	public Map<Long, String> getSpecIdNandName() {
+		// TODO Auto-generated method stub
+		List<Object[]> list= repo.getSpecIdNandName();
+		 Map<Long,String> map= MyCollectionsUtil.convertToMap(list);
+		return map;
 	}
 
 }
