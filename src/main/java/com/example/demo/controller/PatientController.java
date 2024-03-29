@@ -1,8 +1,6 @@
 package com.example.demo.controller;
 
 import java.util.List;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,38 +11,30 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.example.demo.entity.Doctor;
-import com.example.demo.exception.DoctorNotFoundException;
-import com.example.demo.service.IDoctorService;
-import com.example.demo.service.ISpecializationService;
+import com.example.demo.entity.Patient;
+import com.example.demo.exception.PatientNotFoundException;
+import com.example.demo.service.IPatientService;
 
 @Controller
-@RequestMapping("/doctor")
-public class DoctorController {
+@RequestMapping("/patient")
+public class PatientController {
 	@Autowired
-	private IDoctorService service;
-	@Autowired
-	private ISpecializationService specService;
+	private IPatientService service;
 	
-	private void createDynamicUi(Model model) {
-		Map<Long,String> specializations=specService.getSpecIdNandName();
-		model.addAttribute("specializations", specializations);
-		
-	}
+
 	// 1. show register page
 	@GetMapping("/register")
 	public String showRegister(@RequestParam(value = "message",required = false)String message,Model model) {
 		model.addAttribute("message", message);
-		createDynamicUi(model);
-		return "DoctorRegister";
+		return "PatientRegister";
 		
 	}
 	
 	//2.save on submit
 	@PostMapping("/save")
-	public String save(@ModelAttribute Doctor doc,RedirectAttributes attributes) {
-		Long id = service.saveDoctor(doc);
-		attributes.addAttribute("message", "Doctor ("+id+") is created");
+	public String save(@ModelAttribute Patient patient,RedirectAttributes attributes) {
+		Long id = service.savePatient(patient);
+		attributes.addAttribute("message", "Patient ("+id+") is created");
 		
 		return "redirect:register";
 		
@@ -53,10 +43,10 @@ public class DoctorController {
 	//3.display data
 	@GetMapping("/all")
 	public String display(Model model,@RequestParam(value = "message",required = false)String message) {
-		List<Doctor> list= service.getAllDoctor();
+		List<Patient> list= service.getAllPatient();
 		model.addAttribute("list", list);
 		model.addAttribute("message", message);
-		return "DoctorData";
+		return "PatientData";
 	}
 	
 	//4.delete by id
@@ -64,10 +54,10 @@ public class DoctorController {
 	public String delete(@RequestParam("id")Long id,RedirectAttributes attributes) {
 		String message =null;
 		try {
-			service.removeDoctor(id);
-			message="doctor removed";
+			service.removePatient(id);
+			message="Patient removed";
 
-		} catch (DoctorNotFoundException e) {
+		} catch (PatientNotFoundException e) {
 			// TODO: handle exception
 			e.printStackTrace();
 			message =e.getMessage();
@@ -80,17 +70,16 @@ public class DoctorController {
 	@GetMapping("/edit")
 	public String edit(@RequestParam("id")Long id,RedirectAttributes attributes,Model model) {
 		
-//		return "DoctorEdit";
+//		return "PatientEdit";
 		
 		String page =null;
 		try {
-			Doctor doc= service.getOneDoctor(id);
-			model.addAttribute("doctor", doc);
-			createDynamicUi(model);
+			Patient patient= service.getOnePatient(id);
+			model.addAttribute("Patient", patient);
 
-			page = "DoctorEdit";
+			page = "PatientEdit";
 
-		} catch (DoctorNotFoundException e) {
+		} catch (PatientNotFoundException e) {
 			// TODO: handle exception
 			e.printStackTrace();
 			attributes.addAttribute("message", e.getMessage());
@@ -103,9 +92,9 @@ public class DoctorController {
 	
 	//6.do update
 	@PostMapping("/update")
-	public String doUpdate(@ModelAttribute Doctor doc,RedirectAttributes attributes) {
-		service.updateDoctor(doc);
-		attributes.addAttribute("message", "Doctor ("+doc.getId()+") is updated");
+	public String doUpdate(@ModelAttribute Patient patient,RedirectAttributes attributes) {
+		service.updatePatient(patient);
+		attributes.addAttribute("message", "Patient ("+patient.getId()+") is updated");
 		return "redirect:all";
 		
 	}

@@ -149,10 +149,11 @@
 							<label for="imgLoc">imgLoc</label>
 						</div>
 						<div class="col-4">
-							<input type="text"  name="imgLoc" id="imgLoc" class="form-control"></input>
+							<input type="file"  name="fileob" id="fileob" class="form-control" onchange="uploadFile()"></input>
+							<input type="hidden" id="imgLoc" name="imgLoc">
 						</div>
 						<div class="col-6">
-							<span id="imgLocError"></span>
+							<span id="photoLocError"></span>
 						</div>
 					</div>
 
@@ -168,7 +169,7 @@
 			</div>
 		</div>
 	</div>
-	<script th:src="@{/myjs/doc_validate.js}">
+	<script th:src="@{/myjs/uploadImgBb.js}">
 
 	</script>
 </body>
