@@ -15,6 +15,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -44,7 +46,8 @@ public class Patient {
 	
 	@Column(name = "pat_dob_col")
 	@DateTimeFormat(iso = ISO.DATE)
-	private Date dateOfBirth;
+	@Temporal(TemporalType.DATE)
+	private java.util.Date dateOfBirth;
 	
 	@Column(name = "pat_maritStatus_col")
 	private String maritalStatus;

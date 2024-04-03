@@ -58,21 +58,21 @@
 						</div>
 					</div>
 
-                    	<!-- row #4 -->
+					<!-- row #4 -->
 
 					<div class="row">
 						<div class="col-2">
 							<label for="mobile">Phone</label>
 						</div>
 						<div class="col-4">
-							<textarea name="mobile" id="mobile" class="form-control"></textarea>
+							<input type="text" name="mobile" id="mobile" class="form-control"></input>
 						</div>
 						<div class="col-6">
 							<span id="mobileError"></span>
 						</div>
 					</div>
 
-                    <!-- row #5 -->
+					<!-- row #5 -->
 
 					<div class="row">
 						<div class="col-2">
@@ -86,8 +86,8 @@
 						</div>
 					</div>
 
-                    
-                    <!-- row #6 -->
+
+					<!-- row #6 -->
 
 					<div class="row">
 						<div class="col-2">
@@ -95,56 +95,84 @@
 						</div>
 						<div class="col-4">
 							<input type="radio" name="maritalStatus" id="maritalStatus1" value="Married" />Married
-							<input type="radio" name="maritalStatus" id="maritalStatus2"  value="UnMarried"/>UnMarried
-							<input type="radio" name="maritalStatus" id="maritalStatus3"  value="Divorced"/>Divorced
-							<input type="radio" name="maritalStatus" id="maritalStatus4"  value="Seperated"/>Seperated
+							<input type="radio" name="maritalStatus" id="maritalStatus2" value="UnMarried" />UnMarried
+							<input type="radio" name="maritalStatus" id="maritalStatus3" value="Divorced" />Divorced
+							<input type="radio" name="maritalStatus" id="maritalStatus4" value="Seperated" />Seperated
 						</div>
 						<div class="col-6">
 							<span id="maritalStatusError"></span>
 						</div>
 					</div>
-	<!-- row #7 -->
+					<!-- row #7 -->
 
-    <div class="row">
-        <div class="col-2">
-            <label for="presentAddr">Present Address</label>
-        </div>
-        <div class="col-4">
-            <textarea name="presentAddr" id="presentAddr" class="form-control"></textarea>
-        </div>
-        <div class="col-6">
-            <span id="presentAddrError"></span>
-        </div>
-    </div>
-	<!-- row #8 -->
+					<div class="row">
+						<div class="col-2">
+							<label for="presentAddr">Present Address</label>
+						</div>
+						<div class="col-4">
+							<textarea name="presentAddr" id="presentAddr" class="form-control"></textarea>
+						</div>
+						<div class="col-6">
+							<span id="presentAddrError"></span>
+						</div>
+					</div>
+					<!-- row #8 -->
 
-    <div class="row">
-        <div class="col-2">
-            <label for="commAddr">Communication Address</label>
-        </div>
-        <div class="col-4">
-            <textarea name="commAddr" id="commAddr" class="form-control"></textarea>
-        </div>
-        <div class="col-6">
-            <span id="commAddrError"></span>
-        </div>
-    </div>
-	<!-- row #9 -->
+					<div class="row">
+						<div class="col-2">
+							<label for="commAddr">Communication Address</label>
+						</div>
+						<div class="col-4">
+							<textarea name="commAddr" id="commAddr" class="form-control"></textarea>
+						</div>
+						<div class="col-6">
+							<span id="commAddrError"></span>
+						</div>
+					</div>
+					<!-- row #9 -->
 
-    <div class="row">
-        <div class="col-2">
-            <label for="commAddr">Medical History</label>
-        </div>
-        <div class="col-4">
-            <input type="checkbox" name="mediHistory" id="mediHistory1" class="form-control" value="BP"/>BP
-            <input type="checkbox" name="mediHistory" id="mediHistory2" class="form-control" value="Sugar"/>Sugar
-            <input type="checkbox" name="mediHistory" id="mediHistory3" class="form-control" value="Cancer"/>Cancer
-            <input type="checkbox" name="mediHistory" id="mediHistory4" class="form-control" value="Thyroid"/>Thyroid
-        </div>
-        <div class="col-6">
-            <span id="commAddrError"></span>
-        </div>
-    </div>
+					<div class="row">
+						<div class="col-2">
+							<label for="mediHistory">Medical History</label>
+						</div>
+						<div class="col-4">
+							<input type="checkbox" name="mediHistory" id="mediHistory1" value="BP" />BP
+							<input type="checkbox" name="mediHistory" id="mediHistory2" value="Sugar" />Sugar
+							<input type="checkbox" name="mediHistory" id="mediHistory3" value="Cancer" />Cancer
+							<input type="checkbox" name="mediHistory" id="mediHistory4" value="Thyroid" />Thyroid
+						</div>
+						<div class="col-6">
+							<span id="commAddrError"></span>
+						</div>
+					</div>
+					<!-- row #10 -->
+
+					<div class="row">
+						<div class="col-2">
+							<label for="ifOther">If Other History
+								<input type="checkbox" name="mediHistory" id="mediHistory5" value="ifOther" />
+							</label>
+						</div>
+						<div class="col-4">
+							<input type="text" name="ifOther" id="ifOther" class="form-control"></input>
+						</div>
+						<div class="col-6">
+							<span id="mediHistoryError"></span>
+						</div>
+					</div>
+						<!-- row #7 -->
+
+					<div class="row">
+						<div class="col-2">
+							<label for="note">Note</label>
+						</div>
+						<div class="col-4">
+							<textarea name="note" id="note" class="form-control"></textarea>
+						</div>
+						<div class="col-6">
+							<span id="noteError"></span>
+						</div>
+					</div>
 
 					<button type="submit" class="btn btn-success">Create <i class="fa fa-plus-circle"
 							aria-hidden="true"></i></button>
