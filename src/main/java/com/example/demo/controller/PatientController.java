@@ -75,7 +75,7 @@ public class PatientController {
 		String page =null;
 		try {
 			Patient patient= service.getOnePatient(id);
-			model.addAttribute("Patient", patient);
+			model.addAttribute("patient", patient);
 
 			page = "PatientEdit";
 
