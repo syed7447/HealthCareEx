@@ -13,22 +13,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.example.demo.entity.Doctor;
-import com.example.demo.exception.DoctorNotFoundException;
+import com.example.demo.entity.Appointment;
+import com.example.demo.exception.AppointmentNotFoundException;
+import com.example.demo.service.IAppointmentService;
 import com.example.demo.service.IDoctorService;
 import com.example.demo.service.ISpecializationService;
 
 @Controller
-@RequestMapping("/doctor")
-public class DoctorController {
+@RequestMapping("/appointment")
+public class AppointmentController {
 	@Autowired
-	private IDoctorService service;
+	private IAppointmentService service;
 	@Autowired
-	private ISpecializationService specService;
+	private IDoctorService docService;
 	
 	private void createDynamicUi(Model model) {
-		Map<Long,String> specializations=specService.getSpecIdNandName();
-		model.addAttribute("specializations", specializations);
+		Map<Long,String> doctor=docService.getDocIdNandNames();
+		model.addAttribute("doctors", doctor);
 		
 	}
 	// 1. show register page
@@ -36,14 +37,14 @@ public class DoctorController {
 	public String showRegister(@RequestParam(value = "message",required = false)String message,Model model) {
 		model.addAttribute("message", message);
 		createDynamicUi(model);
-		return "DoctorRegister";	
+		return "AppointmentRegister";	
 	}
 	
 	//2.save on submit
 	@PostMapping("/save")
-	public String save(@ModelAttribute Doctor doc,RedirectAttributes attributes) {
-		Long id = service.saveDoctor(doc);
-		attributes.addAttribute("message", "Doctor ("+id+") is created");
+	public String save(@ModelAttribute Appointment app,RedirectAttributes attributes) {
+		Long id = service.saveAppointment(app);
+		attributes.addAttribute("message", "Appointment ("+id+") is created");
 		
 		return "redirect:register";
 		
@@ -52,10 +53,10 @@ public class DoctorController {
 	//3.display data
 	@GetMapping("/all")
 	public String display(Model model,@RequestParam(value = "message",required = false)String message) {
-		List<Doctor> list= service.getAllDoctor();
+		List<Appointment> list= service.getAllAppointment();
 		model.addAttribute("list", list);
 		model.addAttribute("message", message);
-		return "DoctorData";
+		return "AppointmentData";
 	}
 	
 	//4.delete by id
@@ -63,10 +64,10 @@ public class DoctorController {
 	public String delete(@RequestParam("id")Long id,RedirectAttributes attributes) {
 		String message =null;
 		try {
-			service.removeDoctor(id);
-			message="doctor removed";
+			service.removeAppointment(id);
+			message="Appointment removed";
 
-		} catch (DoctorNotFoundException e) {
+		} catch (AppointmentNotFoundException e) {
 			// TODO: handle exception
 			e.printStackTrace();
 			message =e.getMessage();
@@ -79,17 +80,17 @@ public class DoctorController {
 	@GetMapping("/edit")
 	public String edit(@RequestParam("id")Long id,RedirectAttributes attributes,Model model) {
 		
-//		return "DoctorEdit";
+//		return "AppointmentEdit";
 		
 		String page =null;
 		try {
-			Doctor doc= service.getOneDoctor(id);
-			model.addAttribute("doctor", doc);
+			Appointment app= service.getOneAppointment(id);
+			model.addAttribute("Appointment", app);
 			createDynamicUi(model);
 
-			page = "DoctorEdit";
+			page = "AppointmentEdit";
 
-		} catch (DoctorNotFoundException e) {
+		} catch (AppointmentNotFoundException e) {
 			// TODO: handle exception
 			e.printStackTrace();
 			attributes.addAttribute("message", e.getMessage());
@@ -102,9 +103,9 @@ public class DoctorController {
 	
 	//6.do update
 	@PostMapping("/update")
-	public String doUpdate(@ModelAttribute Doctor doc,RedirectAttributes attributes) {
-		service.updateDoctor(doc);
-		attributes.addAttribute("message", "Doctor ("+doc.getId()+") is updated");
+	public String doUpdate(@ModelAttribute Appointment app,RedirectAttributes attributes) {
+		service.updateAppointment(app);
+		attributes.addAttribute("message", "Appointment ("+app.getId()+") is updated");
 		return "redirect:all";
 		
 	}
