@@ -1,6 +1,5 @@
 package com.example.demo.entity;
 
-import java.sql.Date;
 import java.util.Set;
 
 import org.springframework.format.annotation.DateTimeFormat;

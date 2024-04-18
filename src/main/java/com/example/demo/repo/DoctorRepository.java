@@ -10,4 +10,6 @@ import com.example.demo.entity.Doctor;
 public interface DoctorRepository extends JpaRepository<Doctor, Long> {
 	@Query("SELECT id,firstName,lastName from Doctor")
 	List<Object[]> getDoctorIdNandNames();
+	@Query("SELECT doct from Doctor doct INNER JOIN doct.specialization as spc WHERE spc.specName like :specName")
+	public List<Doctor> findDoctorBySpecName(String specName);
 }

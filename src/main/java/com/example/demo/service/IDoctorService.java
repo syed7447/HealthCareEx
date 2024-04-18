@@ -18,4 +18,5 @@ public interface IDoctorService {
 	
 	Map<Long,String> getDocIdNandNames();
 
+	public List<Doctor> findDoctorBySpecName(Integer specId);
 }
