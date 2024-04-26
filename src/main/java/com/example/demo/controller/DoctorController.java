@@ -33,7 +33,7 @@ public class DoctorController {
 	}
 	// 1. show register page
 	@GetMapping("/register")
-	public String showRegister(@RequestParam(value = "message",required = false)String message,Model model) {
+	public String showRegister(@RequestParam(required = false)String message,Model model) {
 		model.addAttribute("message", message);
 		createDynamicUi(model);
 		return "DoctorRegister";	
@@ -51,7 +51,7 @@ public class DoctorController {
 	
 	//3.display data
 	@GetMapping("/all")
-	public String display(Model model,@RequestParam(value = "message",required = false)String message) {
+	public String display(Model model,@RequestParam(required = false)String message) {
 		List<Doctor> list= service.getAllDoctor();
 		model.addAttribute("list", list);
 		model.addAttribute("message", message);
@@ -60,7 +60,7 @@ public class DoctorController {
 	
 	//4.delete by id
 	@GetMapping("/delete")
-	public String delete(@RequestParam("id")Long id,RedirectAttributes attributes) {
+	public String delete(@RequestParam Long id,RedirectAttributes attributes) {
 		String message =null;
 		try {
 			service.removeDoctor(id);
@@ -77,7 +77,7 @@ public class DoctorController {
 	
 	 //5. show edit
 	@GetMapping("/edit")
-	public String edit(@RequestParam("id")Long id,RedirectAttributes attributes,Model model) {
+	public String edit(@RequestParam Long id,RedirectAttributes attributes,Model model) {
 		
 //		return "DoctorEdit";
 		

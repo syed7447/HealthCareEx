@@ -20,7 +20,7 @@ public class ISpecializationServiceImpl implements ISpecializationService {
 	@Override
 	public Long saveSpecialization(Specialization spec) {
 		// TODO Auto-generated method stub
-		return repo.save(spec).getId();
+		return repo.save(spec).getSpecId();
 	}
 
 	@Override

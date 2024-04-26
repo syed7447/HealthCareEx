@@ -19,33 +19,35 @@ import org.springframework.test.annotation.Rollback;
 import com.example.demo.entity.Specialization;
 import com.example.demo.repo.SpecializationRepository;
 
+//execute test  cases in order
+
 @DataJpaTest(showSql = true) //activate data JPA
 @AutoConfigureTestDatabase(replace = Replace.NONE) //user our own properties file as input to create datasource
 @Rollback(false) //after unit testing data will be deleted rollback=true
-@TestMethodOrder(OrderAnnotation.class) //execute test  cases in order
-
-public class SpecializationRepositoryTest {
+@TestMethodOrder(OrderAnnotation.class)
+class SpecializationRepositoryTest {
 	@Autowired
 	private SpecializationRepository repo;
-	
-	
-	/**
-	 * Test save operation
-	 **/
+
+
+    /**
+     * Test save operation
+     **/
 //	@Disabled
-	@Test
-	@Order(1)
-	public void testSpecCreate() {
+    @Test
+    @Order(1)
+    void specCreate() {
 		Specialization spec = new Specialization(0, "CRDLS", "Cardiologist", "A cardiologist is a doctor who specializes in diagnosing, treating, and preventing diseases of the heart and blood vessels");
 		 spec = repo.save(spec);
-		 assertNotNull(spec.getId(),"spec not created");
+		 assertNotNull(spec.getSpecId(),"spec not created");
 	}
-	/**
-	 * Test display all operation
-	 */
-	@Test
-	@Order(2)
-	public void testSpecFetchAll() {
+
+    /**
+     * Test display all operation
+     */
+    @Test
+    @Order(2)
+    void specFetchAll() {
 		List list = repo.findAll();
 		assertNotNull(list);
 		if(list.size()<0) {

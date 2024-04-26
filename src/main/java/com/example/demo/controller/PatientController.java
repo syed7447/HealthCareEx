@@ -24,7 +24,7 @@ public class PatientController {
 
 	// 1. show register page
 	@GetMapping("/register")
-	public String showRegister(@RequestParam(value = "message",required = false)String message,Model model) {
+	public String showRegister(@RequestParam(required = false)String message,Model model) {
 		model.addAttribute("message", message);
 		return "PatientRegister";
 		
@@ -42,7 +42,7 @@ public class PatientController {
 	
 	//3.display data
 	@GetMapping("/all")
-	public String display(Model model,@RequestParam(value = "message",required = false)String message) {
+	public String display(Model model,@RequestParam(required = false)String message) {
 		List<Patient> list= service.getAllPatient();
 		model.addAttribute("list", list);
 		model.addAttribute("message", message);
@@ -51,7 +51,7 @@ public class PatientController {
 	
 	//4.delete by id
 	@GetMapping("/delete")
-	public String delete(@RequestParam("id")Long id,RedirectAttributes attributes) {
+	public String delete(@RequestParam Long id,RedirectAttributes attributes) {
 		String message =null;
 		try {
 			service.removePatient(id);
@@ -68,7 +68,7 @@ public class PatientController {
 	
 	 //5. show edit
 	@GetMapping("/edit")
-	public String edit(@RequestParam("id")Long id,RedirectAttributes attributes,Model model) {
+	public String edit(@RequestParam Long id,RedirectAttributes attributes,Model model) {
 		
 //		return "PatientEdit";
 		

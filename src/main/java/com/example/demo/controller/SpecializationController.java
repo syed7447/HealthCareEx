@@ -41,7 +41,7 @@ public class SpecializationController {
 	}
 
 	@GetMapping("/all")
-	public String viewAll(Model model, @RequestParam(value = "message", required = false) String message) {
+	public String viewAll(Model model, @RequestParam(required = false) String message) {
 		List<Specialization> list = service.getAllSpecializatiion();
 		model.addAttribute("list", list);
 		model.addAttribute("message", message);
@@ -87,7 +87,7 @@ public class SpecializationController {
 	@PostMapping("/update")
 	public String updateSpecialization(@ModelAttribute Specialization spec, RedirectAttributes attributes) {
 		service.updateSpecialization(spec);
-		attributes.addAttribute("message", "Record (" + spec.getId() + ") is updated");
+		attributes.addAttribute("message", "Record (" + spec.getSpecId() + ") is updated");
 		return "redirect:all";
 
 	}

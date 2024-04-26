@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.entity.Appointment;
+import com.example.demo.entity.Doctor;
 import com.example.demo.exception.AppointmentNotFoundException;
 import com.example.demo.service.IAppointmentService;
 import com.example.demo.service.IDoctorService;
@@ -26,6 +27,8 @@ public class AppointmentController {
 	private IAppointmentService service;
 	@Autowired
 	private IDoctorService docService;
+	@Autowired
+	private ISpecializationService specService;
 	
 	private void createDynamicUi(Model model) {
 		Map<Long,String> doctor=docService.getDocIdNandNames();
@@ -34,7 +37,7 @@ public class AppointmentController {
 	}
 	// 1. show register page
 	@GetMapping("/register")
-	public String showRegister(@RequestParam(value = "message",required = false)String message,Model model) {
+	public String showRegister(@RequestParam(required = false)String message,Model model) {
 		model.addAttribute("message", message);
 		createDynamicUi(model);
 		return "AppointmentRegister";	
@@ -52,7 +55,7 @@ public class AppointmentController {
 	
 	//3.display data
 	@GetMapping("/all")
-	public String display(Model model,@RequestParam(value = "message",required = false)String message) {
+	public String display(Model model,@RequestParam(required = false)String message) {
 		List<Appointment> list= service.getAllAppointment();
 		model.addAttribute("list", list);
 		model.addAttribute("message", message);
@@ -61,7 +64,7 @@ public class AppointmentController {
 	
 	//4.delete by id
 	@GetMapping("/delete")
-	public String delete(@RequestParam("id")Long id,RedirectAttributes attributes) {
+	public String delete(@RequestParam Long id,RedirectAttributes attributes) {
 		String message =null;
 		try {
 			service.removeAppointment(id);
@@ -78,7 +81,7 @@ public class AppointmentController {
 	
 	 //5. show edit
 	@GetMapping("/edit")
-	public String edit(@RequestParam("id")Long id,RedirectAttributes attributes,Model model) {
+	public String edit(@RequestParam Long id,RedirectAttributes attributes,Model model) {
 		
 //		return "AppointmentEdit";
 		
@@ -110,6 +113,24 @@ public class AppointmentController {
 		
 	}
 	
+	@GetMapping("/view")
+	public String viewSlots(Model model,@RequestParam(required = false , defaultValue = "0") Long specId) {
+		System.out.println(specId+"specId=======");
+		//fetch data for SpecDropDown
+		Map<Long,String> specMap = specService.getSpecIdNandName();
+		model.addAttribute("specializations",specMap);
+		List<Doctor> docList=null;
+		if(specId == 0) { //if they did not select any specialization
+			docList= docService.getAllDoctor();
+		}
+		else {
+			docList= docService.findDoctorBySpecName(specId);
+
+		}
+		model.addAttribute("docList",docList);
+		
+		return "AppointmentSearch";
+	}
 	//6.email and mobile validation using ajax
 	
 	//7. excel export
